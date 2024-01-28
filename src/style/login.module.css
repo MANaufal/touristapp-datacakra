@@ -1,0 +1,127 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.loginContainer {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 25px;
+    display: flex;
+    width: 60%;
+    height: 75%;
+    margin: auto;
+    align-self: center;
+}
+
+.cardContainer, .cardContainerRegister{
+    height: 100%;
+    width: 50%;
+    background-color: #1b3048;;
+    border-radius: 25px;
+    -webkit-transition: 1s;
+    transition: 1s;
+    z-index: 10;
+    font-size: 20px;
+    text-align: center;
+}
+
+.cardContainer{
+    transform: translateX(100%);
+    background-color: #4892E8;
+}
+
+.cardTextContainer{
+    margin: 35px;
+    font-size: 25px;
+}
+
+.formContainer, .formContainerRegister{
+    width: 50%;
+    -webkit-transition: 1s;
+    display: flex;
+    text-align: center;
+    transition: 1s;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+}
+
+.formContainer{
+    transform: translateX(-100%);
+}
+
+.formInput{
+    width: 80%;
+    align-self: center;
+    background-color: #F1F0F0;
+    color: black;
+    border: 0px;
+    font-size: 17px;
+    padding: 9px;
+    border-radius: 10px;
+    margin-top: 25px;
+    -webkit-transition: 1s;
+    transition: 1s;
+}
+
+.formButton{
+    background-color: #4892E8;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-inline: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 60%;
+    margin-top: 70px;
+    -webkit-transition: 1s;
+    transition: 1s;
+    align-self: center;
+    cursor: pointer;
+}
+
+.formButton:hover{
+    background-color: #165dad;
+    text-decoration: underline;
+}
+
+.buttonActive{
+    background-color: #1b3048;
+}
+
+.reminderText{
+    color: black;
+    font-size:13px;
+    margin-top: 10px;
+}
+
+.disappear{
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    width: 0;
+    align-self: center;
+    border: none;
+    -webkit-transition: 1.5s;
+    transition: 1.5s;
+}
+
+.textSwitch{
+    color:rgb(167, 91, 249);
+    cursor: pointer;
+}
+
+.textSwitch:hover{
+    color:rgb(147, 57, 243);
+    text-decoration: underline;
+}
+
+.incorrectInput{
+    color:red;
+    font-size: 15px;
+    margin: 5px;
+}
