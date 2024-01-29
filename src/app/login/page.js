@@ -1,34 +1,36 @@
 "use client"
 
 import styles from '@/style/login.module.css';
-import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, FormEvent, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 export default function Login(){
-   const [LoginError, setLoginError] = useState(false);
-   const [isLogin, setisLogin] = useState(false);
+   const router = useRouter();
 
-   function switchLogin(){
+   const [LoginError, setLoginError] = useState(null);
+   const [isLogin, setisLogin] = useState(true);
+
+   const switchLogin = () => {
       setisLogin(!isLogin);
-      console.log(isLogin);
+      setLoginError(false);
    }
 
-   async function onSubmit(event){
+   const onSubmit = async (event) => {
       event.preventDefault();
 
       const formData = new FormData(event.target);
 
-      console.log(formData.get('email'), formData.get('password'));
-
       const requestBody = new URLSearchParams(formData).toString();
-      
-      var apiUrl;
 
       if(isLogin){
-         await login(requestBody)
+         await login(requestBody);
+      } else {
+         await register(requestBody);
       }
    }
 
-   async function login(requestBody){
+   const login = async (requestBody) => {
       const response = await fetch('https://biroperjalanan.datacakra.com/api/authaccount/login', {
          method: 'POST',
          headers: {
@@ -40,12 +42,38 @@ export default function Login(){
       if(response.ok){
          setLoginError(false);
          const data = await response.json();
-         const token = data.data.Token;
-         console.log(token);
-      } else {
-         setLoginError(true);
+         
+         Cookies.set('name', data.data.Name);
+         Cookies.set('email', data.data.Email);
+         Cookies.set('token', data.data.Token);
+
+         console.log(Cookies.get('token'));
+         router.push('/');
+      } else if(response.status == 401){
+         setLoginError("Your email or password is incorrect");
       }
    }
+
+   const register = async (requestBody) => {
+      const response = await fetch('https://biroperjalanan.datacakra.com/api/authaccount/register', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+         },
+         body: requestBody,
+      });
+
+      if(response.ok){
+         login(requestBody);
+      }
+   }
+
+   useEffect(() => {
+      const token = Cookies.get('token');
+      if(token){
+         router.push('/');
+      }
+   }, [])
 
    return(
       <div className={styles.container}>
@@ -60,7 +88,7 @@ export default function Login(){
                <input name='email' type="email" placeholder="Email" className={styles.formInput}/>
                <input name='name' placeholder="Username" className={isLogin ? styles.disappear : styles.formInput}/>
                <input name='password' placeholder="Password" className={styles.formInput} type='password'/>
-               {LoginError && <p className={styles.incorrectInput}>Your email or password is incorrect</p>}
+               {LoginError && <p className={styles.incorrectInput}>{LoginError}</p>}
                <button className={`${styles.formButton} ${isLogin ? styles.buttonActive : ''}`}>{isLogin ? 'Login' : 'Register'}</button>
                <p className={styles.reminderText}>{isLogin ? `Don't have an account? ` : `Already have an account? `}<a onClick={switchLogin} className={styles.textSwitch}>{isLogin ? `register` : `login`}</a></p>
             </form>

@@ -60,7 +60,7 @@
 .paginationInput{
     background-color: white;
     color: black;
-    width: 30px;
+    width: 50px;
     margin-right: 5px;
     padding: 5px;
     border: 2px solid rgb(235, 235, 235);
@@ -100,7 +100,7 @@
     border-radius: 5px;
     border: 1px solid rgb(209, 209, 209);
     background-color: white;
-    color: rgb(115, 115, 115);
+    color: rgb(59, 59, 59);
     -webkit-transition: 0.2s;
     transition: 0.2s;
     cursor: pointer;
@@ -109,4 +109,42 @@
 .paginationButton:hover{
     background-color: rgb(90, 90, 249);
     color: white;
+}
+
+.columnLoading{
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+    background-size: 1000px 640px;
+    border-radius: 5px;
+    padding-top: 25px;
+    position: relative;
+}
+
+.deleteButton{
+    background-color: red;
+    color: white;
+    border: 2px solid red;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deleteButton:hover{
+    background-color: white;
+    color: red;
+    border: 2px solid red;
+}
+
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
 }

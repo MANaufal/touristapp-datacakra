@@ -1,8 +1,9 @@
 .navbarContainer{
     background-color: #2F3133;
     width: 100%;
-    position: static;
-    height: 100%;
+    position: sticky;
+    top: 0;
+    height: 15%;
     padding: 15px;
     display: flex;
     padding-inline: 20px;
@@ -17,4 +18,5 @@
     font-size: 15px;
     align-self: center;
     margin-left: auto;
+    cursor: pointer;
 }
